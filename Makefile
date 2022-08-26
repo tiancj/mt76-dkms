@@ -7,6 +7,8 @@ PKG_MAKE_FLAGS += CONFIG_MT76x2_COMMON=m
 PKG_MAKE_FLAGS += CONFIG_MT76X2E=m
 PKG_MAKE_FLAGS += CONFIG_MT76x2U=m
 PKG_MAKE_FLAGS += CONFIG_MT7603E=m
+PKG_MAKE_FLAGS += CONFIG_MT7921_COMMON=m
+PKG_MAKE_FLAGS += CONFIG_MT7921U=m
 
 KVERSION := $(shell uname -r)
 KDIR := /usr/lib/modules/$(KVERSION)/build
@@ -14,7 +16,7 @@ KDIR := /usr/lib/modules/$(KVERSION)/build
 # Make sure the whitespaces before the "make" commands below are real tabs!
 all:
 	@echo $(value obj-y)
-	make -C $(KDIR) M=$(PWD)/src NOSTDINC_FLAGS=-I$(PWD)/src $(PKG_MAKE_FLAGS) modules
+	make -C $(KDIR) M=$(PWD)/src NOSTDINC_FLAGS=-I$(PWD)/src $(PKG_MAKE_FLAGS) modules -j8
 
 clean:
 	make -C $(KDIR) M=$(PWD)/src clean
